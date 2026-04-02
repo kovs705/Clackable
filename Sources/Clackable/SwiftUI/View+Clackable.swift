@@ -4,11 +4,13 @@ import Foundation
 import SwiftUI
 
 /// Defines the user interaction that should trigger a clack sound for SwiftUI views.
+@available(macOS 10.15, *)
 public enum ClackTrigger: Sendable, Equatable {
     case tap(count: Int = 1)
     case longPress(minimumDuration: Double = 0.5, maximumDistance: CGFloat = 10)
 }
 
+@available(macOS 10.15, *)
 private struct ClackableViewModifier: ViewModifier {
     let configuration: ClackableConfiguration
     let trigger: ClackTrigger
@@ -33,6 +35,7 @@ private struct ClackableViewModifier: ViewModifier {
     }
 }
 
+@available(macOS 10.15, *)
 public extension View {
     func clackable(_ configuration: ClackableConfiguration, trigger: ClackTrigger = .tap()) -> some View {
         modifier(ClackableViewModifier(configuration: configuration, trigger: trigger))

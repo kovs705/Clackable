@@ -3,15 +3,13 @@ import Foundation
 
 final class SoundPool: NSObject, AVAudioPlayerDelegate {
     private let clip: SoundClip
-    private let poolCapacity: Int
-    private let defaultVolume: Float
+    private var poolCapacity: Int
     private var players: [AVAudioPlayer] = []
     private let lock = NSLock()
 
-    init(clip: SoundClip, poolCapacity: Int, defaultVolume: Float) {
+    init(clip: SoundClip, poolCapacity: Int) {
         self.clip = clip
         self.poolCapacity = poolCapacity
-        self.defaultVolume = defaultVolume
         super.init()
     }
 
@@ -22,10 +20,15 @@ final class SoundPool: NSObject, AVAudioPlayerDelegate {
         _ = makePlayer()
     }
 
-    func playOverrideVolume(_ overrideVolume: Float?) {
+    func reserveCapacity(_ minimumCapacity: Int) {
+        lock.lock()
+        defer { lock.unlock() }
+        poolCapacity = max(poolCapacity, minimumCapacity)
+    }
+
+    func play(volume: Float) {
         guard let player = nextAvailablePlayer() else { return }
 
-        let volume = overrideVolume ?? defaultVolume
         if player.volume != volume {
             player.volume = volume
         }
@@ -58,7 +61,6 @@ final class SoundPool: NSObject, AVAudioPlayerDelegate {
         do {
             let player = try AVAudioPlayer(contentsOf: clip.url)
             player.delegate = self
-            player.volume = defaultVolume
             player.prepareToPlay()
             players.append(player)
             return player
