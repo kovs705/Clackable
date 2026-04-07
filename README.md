@@ -1,6 +1,13 @@
+<div align="center">
+<img width="300" height="300" src="/Assets/Clackable.png" alt="Clackable icon">
+
 # Clackable
 
-`Clackable` is a lightweight Swift package for adding short tactile "click" or "clack" sounds to UI interactions.
+*`Clackable` is a lightweight Swift package for adding short tactile "click" or "clack" sounds to UI interactions.*
+
+</div>
+
+---
 
 It is designed for app interfaces where you want quick, low-friction audio feedback for taps, long presses, buttons, toggles, or custom gestures.
 
