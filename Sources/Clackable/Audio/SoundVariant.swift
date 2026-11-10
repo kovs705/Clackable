@@ -16,4 +16,3 @@ public struct SoundVariant: Hashable, Sendable {
         self.poolCapacity = poolCapacity
     }
 }
-

@@ -34,7 +34,7 @@ final class SoundPool: NSObject, AVAudioPlayerDelegate {
         }
 
         player.currentTime = 0
-        player.play()
+        _ = player.play()
     }
 
     private func nextAvailablePlayer() -> AVAudioPlayer? {

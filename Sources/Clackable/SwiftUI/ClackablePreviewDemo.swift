@@ -86,7 +86,7 @@ private struct ClackablePreviewDemo: View {
         return ClackableConfiguration(
             variants: [
                 SoundVariant(clip: wetClick, weight: 1.0, volume: 0.9, poolCapacity: 2),
-                SoundVariant(clip: ticTocClick, weight: 1.0, volume: 0.8, poolCapacity: 2),
+                SoundVariant(clip: ticTocClick, weight: 1.0, volume: 0.8, poolCapacity: 2)
             ],
             defaultVolume: 0.9
         )
